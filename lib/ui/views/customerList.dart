@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:customers/data/entity/customers.dart';
 import 'package:customers/ui/cubit/addCustomer_cubit.dart';
 import 'package:customers/ui/cubit/customerList_cubit.dart';
@@ -20,9 +22,7 @@ class _CustomerListState extends State<CustomerList> {
   @override
   void initState() {
     super.initState();
-
     context.read<CustomerListCubit>().getCustomers();
-    context.read<CustomerListCubit>().search("test");
   }
 
   @override
@@ -83,9 +83,7 @@ class _CustomerListState extends State<CustomerList> {
                         context,
                         MaterialPageRoute(
                           builder: (context) => CustomerEdit(customer: item),
-                        )).then((value){
-                        context.read<CustomerListCubit>().getCustomers();
-                    });
+                        ));
                   },
                   child: Card(
                     child: Padding(
@@ -98,26 +96,28 @@ class _CustomerListState extends State<CustomerList> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                item.name,
+                                item.kisi_name,
                                 style: const TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 20),
                               ),
-                              Text(item.email),
+                              Text(item.kisi_email),
                             ],
                           ),
                           IconButton(
                               onPressed: () {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                    content: Text("Are u sure to delete ${item.name}?"),
-                                      action: SnackBarAction(
-                                        label: "Yes",
-                                        onPressed: (){
-                                          context.read<CustomerListCubit>().remove(item.id);
-                                        },
-                                      ),
-                                  )
-                                );
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(SnackBar(
+                                  content: Text(
+                                      "Are u sure to delete ${item.kisi_name}?"),
+                                  action: SnackBarAction(
+                                    label: "Yes",
+                                    onPressed: () {
+                                      context
+                                          .read<CustomerListCubit>()
+                                          .remove(item.kisi_id);
+                                    },
+                                  ),
+                                ));
                               },
                               icon: const Icon(
                                 Icons.delete,
@@ -141,10 +141,7 @@ class _CustomerListState extends State<CustomerList> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (BuildContext context) => const AddCustomer()))
-                .then((value){
-                  context.read<CustomerListCubit>().getCustomers();
-          });
+                  builder: (BuildContext context) => const AddCustomer()));
         },
       ),
     );

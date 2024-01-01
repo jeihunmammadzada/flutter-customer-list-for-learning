@@ -21,8 +21,8 @@ class _CustomerEditState extends State<CustomerEdit> {
     super.initState();
 
     var customer = widget.customer;
-    tfName.text = customer.name;
-    tfEmail.text = customer.email;
+    tfName.text = customer.kisi_name;
+    tfEmail.text = customer.kisi_email;
   }
 
   @override
@@ -58,7 +58,7 @@ class _CustomerEditState extends State<CustomerEdit> {
                   onPressed: () {
                     context
                         .read<CustomerEditCubit>()
-                        .Update(widget.customer.id, tfName.text, tfEmail.text);
+                        .Update(widget.customer.kisi_id, tfName.text, tfEmail.text);
 
                     Navigator.pop(context);
                   },

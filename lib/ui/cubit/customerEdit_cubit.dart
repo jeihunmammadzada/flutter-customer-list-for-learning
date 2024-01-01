@@ -7,7 +7,7 @@ class CustomerEditCubit extends Cubit<void>{
 
   var crepo = CustomersDaoRepository();
 
-  Future<void> Update(int id, String name, String email) async{
+  Future<void> Update(String id, String name, String email) async{
       await crepo.Update(id, name, email);
   }
 

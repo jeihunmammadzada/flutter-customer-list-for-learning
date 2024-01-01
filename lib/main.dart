@@ -1,11 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:customers/ui/cubit/addCustomer_cubit.dart';
 import 'package:customers/ui/cubit/customerEdit_cubit.dart';
 import 'package:customers/ui/cubit/customerList_cubit.dart';
 import 'package:customers/ui/views/customerList.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 

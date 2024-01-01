@@ -33,6 +33,9 @@ dependencies:
   flutter_bloc:
   path:
   sqflite:
+  dio:
+  firebase_core:
+  cloud_firestore:
 
 
   # The following adds the Cupertino Icons font to your application.
